@@ -3,7 +3,6 @@ package com.whatever.raisedragon.domain.user
 import com.whatever.raisedragon.domain.BaseEntity
 import jakarta.persistence.*
 import org.hibernate.annotations.SQLRestriction
-import java.time.LocalDateTime
 
 @Table(name = "users")
 @Entity
@@ -31,10 +30,6 @@ fun User.fromDto(): UserEntity = UserEntity(
     fcmTokenPayload = fcmTokenPayload,
     nickname = nickname,
 )
-
-fun UserEntity.disable() {
-    this.deletedAt = LocalDateTime.now()
-}
 
 fun UserEntity.able() {
     this.deletedAt = null

@@ -9,7 +9,6 @@ import com.whatever.raisedragon.domain.goal.GoalService
 import com.whatever.raisedragon.domain.goalproof.Comment
 import com.whatever.raisedragon.domain.goalproof.GoalProof
 import com.whatever.raisedragon.domain.goalproof.GoalProofService
-import com.whatever.raisedragon.domain.user.UserService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -20,7 +19,6 @@ import java.time.temporal.ChronoUnit
 class GoalProofApplicationService(
     private val goalProofService: GoalProofService,
     private val goalService: GoalService,
-    private val userService: UserService,
 ) {
 
     @Transactional

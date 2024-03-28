@@ -22,8 +22,3 @@ class RefreshTokenEntity(
     val id: Long = 0L
 
 ) : BaseEntity()
-
-fun RefreshToken.fromDto(userEntity: UserEntity): RefreshTokenEntity = RefreshTokenEntity(
-    userEntity = userEntity,
-    payload = payload,
-)
