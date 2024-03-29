@@ -5,12 +5,6 @@ import com.whatever.raisedragon.domain.betting.BettingPredictionType
 import com.whatever.raisedragon.domain.betting.BettingResult
 import io.swagger.v3.oas.annotations.media.Schema
 
-@Schema(description = "[Response] 배팅 생성/수정")
-data class BettingCreateUpdateResponse(
-    @Schema(description = "Goal Id")
-    val bettingRetrieveResponse: BettingRetrieveResponse,
-)
-
 @Schema(description = "[Response] 배팅 조회")
 data class BettingRetrieveResponse(
     @Schema(description = "BettingId")
