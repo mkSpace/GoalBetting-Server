@@ -1,5 +1,6 @@
 package com.whatever.raisedragon.applicationservice.betting
 
+import com.whatever.raisedragon.applicationservice.ApplicationServiceTestSupport
 import com.whatever.raisedragon.applicationservice.betting.dto.BettingCreateServiceRequest
 import com.whatever.raisedragon.applicationservice.betting.dto.BettingRetrieveResponse
 import com.whatever.raisedragon.applicationservice.betting.dto.BettingUpdateServiceRequest
@@ -13,7 +14,6 @@ import com.whatever.raisedragon.domain.user.UserEntity
 import com.whatever.raisedragon.domain.user.UserRepository
 import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.*
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
