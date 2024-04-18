@@ -20,7 +20,7 @@ class GifticonEntity(
 
     @Embedded
     @Column(name = "url", nullable = false, length = 255)
-    val url: URL,
+    var url: URL,
 
     @Column(name = "is_validated")
     var isValidated: Boolean = true

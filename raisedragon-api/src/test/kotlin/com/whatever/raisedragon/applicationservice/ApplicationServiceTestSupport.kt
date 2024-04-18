@@ -1,4 +1,4 @@
-package com.whatever.raisedragon.applicationservice.betting
+package com.whatever.raisedragon.applicationservice
 
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
