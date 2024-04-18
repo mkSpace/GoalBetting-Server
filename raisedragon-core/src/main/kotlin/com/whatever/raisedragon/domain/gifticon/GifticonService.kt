@@ -34,6 +34,13 @@ class GifticonService(
     }
 
     @Transactional
+    fun update(gifticonId: Long, gifticonUrl: URL): Gifticon {
+        val gifticon = gifticonRepository.findById(gifticonId).orElseThrow(notFoundExceptionSupplier)
+        gifticon.url = gifticonUrl
+        return gifticon.toDto()
+    }
+
+    @Transactional
     fun hardDeleteByUserId(userId: Long) {
         val gifticonEntities = gifticonRepository.findAllByUserEntity(
             userEntity = userRepository.findById(userId).orElseThrow(notFoundExceptionSupplier)

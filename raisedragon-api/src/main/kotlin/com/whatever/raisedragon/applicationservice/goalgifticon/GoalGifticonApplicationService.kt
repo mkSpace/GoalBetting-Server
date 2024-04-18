@@ -63,7 +63,6 @@ class GoalGifticonApplicationService(
         userId: Long
     ): GifticonResponse {
         val goal = goalService.findById(goalId)
-        isBrokenTiming(goal)
 
         val goalGifticon = if (userId != goal.userId) {
             null
@@ -86,15 +85,11 @@ class GoalGifticonApplicationService(
 
     @Transactional
     fun updateGifticonURLByGoalId(request: GoalGifticonUpdateServiceRequest): GoalGifticonResponse {
-        val userEntity = userService.findById(request.userId).fromDto()
-        val goal = goalService.findById(request.goalId).fromDto(userEntity).toDto()
+        val goal = goalService.findById(request.goalId)
+        validateIsRequestUserHasUpdateAuthority(goal, request.userId)
         val goalGifticon = goalGifticonService.findByGoalId(goal.id)
             ?: throw BaseException.of(ExceptionCode.E404_NOT_FOUND, "다짐에 등록된 기프티콘을 찾을 수 없습니다.")
-        val gifticon = gifticonService.findById(goalGifticon.gifticonId)
-
-        validateIsRequestUserHasUpdateAuthority(goal, request.userId)
-
-        gifticon.url = URL(request.gifticonURL)
+        val gifticon = gifticonService.update(goalGifticon.gifticonId, URL(request.gifticonURL))
 
         return GoalGifticonResponse(
             goalGifticonId = goalGifticon.id,
