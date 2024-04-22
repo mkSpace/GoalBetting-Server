@@ -9,8 +9,6 @@ import org.hamcrest.core.IsNull.nullValue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.*
-import org.springframework.http.MediaType
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
@@ -28,9 +26,9 @@ class BettingControllerTest : ControllerTestSupport() {
         mockMvc
             .perform(
                 post("/v1/betting")
-                    .with(csrf())
-                    .content(objectMapper.writeValueAsString(request))
-                    .contentType(MediaType.APPLICATION_JSON)
+                    .withCsrf()
+                    .writeRequestAsContent(request)
+                    .contentTypeAsJson()
             )
             .andDo(::print)
             .andExpect(status().isCreated())
@@ -48,9 +46,9 @@ class BettingControllerTest : ControllerTestSupport() {
         mockMvc
             .perform(
                 post("/v1/betting")
-                    .with(csrf())
-                    .content(objectMapper.writeValueAsString(request))
-                    .contentType(MediaType.APPLICATION_JSON)
+                    .withCsrf()
+                    .writeRequestAsContent(request)
+                    .contentTypeAsJson()
             )
             .andDo(::print)
             .andExpect(status().isBadRequest)
@@ -87,9 +85,9 @@ class BettingControllerTest : ControllerTestSupport() {
         mockMvc
             .perform(
                 put("/v1/betting")
-                    .with(csrf())
-                    .content(objectMapper.writeValueAsString(request))
-                    .contentType(MediaType.APPLICATION_JSON)
+                    .withCsrf()
+                    .writeRequestAsContent(request)
+                    .contentTypeAsJson()
             )
             .andDo(::print)
             .andExpect(status().isOk)
