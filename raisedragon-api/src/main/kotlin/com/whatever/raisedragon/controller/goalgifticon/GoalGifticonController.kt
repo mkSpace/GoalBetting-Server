@@ -29,7 +29,7 @@ class GoalGifticonController(
     @PostMapping
     fun create(
         @GetAuth userInfo: UserInfo,
-        @Valid request: GoalGifticonCreateRequest,
+        @Valid @RequestBody request: GoalGifticonCreateRequest,
     ): Response<GoalGifticonResponse> {
         return Response.success(
             goalGifticonApplicationService.createAndUploadGifticon(request.toServiceRequest(userInfo.id))
