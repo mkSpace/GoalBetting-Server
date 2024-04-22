@@ -8,10 +8,10 @@ import com.whatever.raisedragon.common.exception.BaseException
 import com.whatever.raisedragon.common.exception.ExceptionCode
 import com.whatever.raisedragon.domain.gifticon.GifticonService
 import com.whatever.raisedragon.domain.gifticon.URL
-import com.whatever.raisedragon.domain.goal.*
+import com.whatever.raisedragon.domain.goal.Goal
+import com.whatever.raisedragon.domain.goal.GoalService
+import com.whatever.raisedragon.domain.goal.GoalType
 import com.whatever.raisedragon.domain.goalgifticon.GoalGifticonService
-import com.whatever.raisedragon.domain.user.UserService
-import com.whatever.raisedragon.domain.user.fromDto
 import com.whatever.raisedragon.domain.winner.WinnerService
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,7 +23,6 @@ class GoalGifticonApplicationService(
     private val gifticonService: GifticonService,
     private val goalService: GoalService,
     private val goalGifticonService: GoalGifticonService,
-    private val userService: UserService,
     private val winnerService: WinnerService
 ) {
 

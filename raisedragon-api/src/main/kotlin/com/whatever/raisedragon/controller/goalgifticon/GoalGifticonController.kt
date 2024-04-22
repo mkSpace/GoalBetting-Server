@@ -29,14 +29,13 @@ class GoalGifticonController(
     @PostMapping
     fun create(
         @GetAuth userInfo: UserInfo,
-        @Valid request: GoalGifticonCreateRequest,
+        @Valid @RequestBody request: GoalGifticonCreateRequest,
     ): Response<GoalGifticonResponse> {
         return Response.success(
             goalGifticonApplicationService.createAndUploadGifticon(request.toServiceRequest(userInfo.id))
         )
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(
         summary = "다짐 내 기프티콘 조회 API",
         description = "다짐 내 기프티콘 조회 (나의 기프티콘 이거나 승리한 경우 조회 가능)",
@@ -52,7 +51,6 @@ class GoalGifticonController(
         )
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(
         summary = "다짐 내 기프티콘 수정 API",
         description = "다짐 내 기프티콘 수정",
