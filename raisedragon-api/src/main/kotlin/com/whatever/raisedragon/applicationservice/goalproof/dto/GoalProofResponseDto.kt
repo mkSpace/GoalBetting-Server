@@ -3,13 +3,6 @@ package com.whatever.raisedragon.applicationservice.goalproof.dto
 import com.whatever.raisedragon.domain.goalproof.GoalProof
 import io.swagger.v3.oas.annotations.media.Schema
 
-
-@Schema(description = "[Response] 인증내역 생성/수정")
-data class GoalProofCreateUpdateResponse(
-    @Schema(description = "GoalProof")
-    val goalProofRetrieveResponse: GoalProofRetrieveResponse
-)
-
 @Schema(description = "[Response] 단건 다짐 인증 조회")
 data class GoalProofRetrieveResponse(
 

@@ -1,6 +1,9 @@
 package com.whatever.raisedragon.applicationservice.goalproof
 
-import com.whatever.raisedragon.applicationservice.goalproof.dto.*
+import com.whatever.raisedragon.applicationservice.goalproof.dto.GoalProofCreateServiceRequest
+import com.whatever.raisedragon.applicationservice.goalproof.dto.GoalProofListRetrieveResponse
+import com.whatever.raisedragon.applicationservice.goalproof.dto.GoalProofRetrieveResponse
+import com.whatever.raisedragon.applicationservice.goalproof.dto.GoalProofUpdateServiceRequest
 import com.whatever.raisedragon.common.exception.BaseException
 import com.whatever.raisedragon.common.exception.ExceptionCode
 import com.whatever.raisedragon.domain.gifticon.URL
@@ -22,7 +25,7 @@ class GoalProofApplicationService(
 ) {
 
     @Transactional
-    fun create(request: GoalProofCreateServiceRequest): GoalProofCreateUpdateResponse {
+    fun create(request: GoalProofCreateServiceRequest): GoalProofRetrieveResponse {
         val goal = goalService.findById(request.goalId)
 
         isGoalProofAlreadyExists(goal.id)
@@ -31,11 +34,11 @@ class GoalProofApplicationService(
         val goalProof = goalProofService.create(
             userId = request.userId,
             goalId = goal.id,
-            url = URL(request.url),
+            url = request.url,
             comment = request.comment
         )
         goalService.increaseThreshold(goal.id)
-        return GoalProofCreateUpdateResponse(GoalProofRetrieveResponse.of(goalProof))
+        return GoalProofRetrieveResponse.of(goalProof)
     }
 
     private fun isGoalProofAlreadyExists(goalId: Long) {
@@ -87,14 +90,13 @@ class GoalProofApplicationService(
             .also { it.validateOwnerId(request.userId) }
             .also { it.validateEndDate() }
         return GoalProofRetrieveResponse.of(
-            goalProofService.update(request.goalProofId, request.url?.let { URL(it) }, request.comment)
+            goalProofService.update(request.goalProofId, request.url, request.comment)
         )
     }
 
     private fun validateGoalProofCreateTiming(goal: Goal) {
         val now = LocalDateTime.now()
         val daysBetween = ChronoUnit.DAYS.between(goal.startDate, now) + 1
-
 
         if (1 > daysBetween || daysBetween > 7) {
             throw BaseException.of(
@@ -108,7 +110,7 @@ class GoalProofApplicationService(
         return goalProofService.findById(goalProofId) ?: throw BaseException.of(ExceptionCode.E404_NOT_FOUND)
     }
 
-    private fun validateUpdatable(url: String?, comment: Comment?) {
+    private fun validateUpdatable(url: URL?, comment: Comment?) {
         if (url == null && comment == null) {
             throw BaseException.of(ExceptionCode.E400_BAD_REQUEST)
         }
@@ -121,7 +123,7 @@ class GoalProofApplicationService(
     }
 
     private fun GoalProof.validateEndDate() {
-        if (goalService.findById(goalId).endDate > LocalDateTime.now()) {
+        if (goalService.findById(goalId).endDate < LocalDateTime.now()) {
             throw BaseException.of(ExceptionCode.E400_BAD_REQUEST, "이미 끝난 내기입니다")
         }
     }
