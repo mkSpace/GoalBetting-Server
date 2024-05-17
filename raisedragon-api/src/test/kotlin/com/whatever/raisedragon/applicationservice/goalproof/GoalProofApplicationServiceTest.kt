@@ -64,8 +64,8 @@ class GoalProofApplicationServiceTest : ApplicationServiceTestSupport {
             .isInstanceOf(GoalProofRetrieveResponse::class.java)
         assertThat(response.goalId).isEqualTo(goalEntity.id)
         assertThat(response.userId).isEqualTo(userEntity.id)
-        assertThat(response.url).isEqualTo(goalProofImageUrl)
-        assertThat(response.comment).isEqualTo(comment)
+        assertThat(response.url).isEqualTo(goalProofImageUrl.value)
+        assertThat(response.comment).isEqualTo(comment.value)
     }
 
     @DisplayName("같은 날짜에 대한 인증이 이미 생성되어있다면 다짐 인증을 생성할 수 없다.")
@@ -158,8 +158,8 @@ class GoalProofApplicationServiceTest : ApplicationServiceTestSupport {
         assertThat(response.id).isEqualTo(goalProofEntity.id)
         assertThat(response.goalId).isEqualTo(goalEntity.id)
         assertThat(response.userId).isEqualTo(userEntity.id)
-        assertThat(response.url).isEqualTo(goalProofImageUrl)
-        assertThat(response.comment).isEqualTo(comment)
+        assertThat(response.url).isEqualTo(goalProofImageUrl.value)
+        assertThat(response.comment).isEqualTo(comment.value)
     }
 
     @DisplayName("다짐 인증 단건 조회 시 해당하지 않은 id로 조회할 경우 조회에 실패한다.")
