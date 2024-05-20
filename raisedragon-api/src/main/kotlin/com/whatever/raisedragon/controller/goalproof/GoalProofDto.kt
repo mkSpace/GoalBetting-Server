@@ -5,6 +5,7 @@ import com.whatever.raisedragon.applicationservice.goalproof.dto.GoalProofUpdate
 import com.whatever.raisedragon.domain.gifticon.URL
 import com.whatever.raisedragon.domain.goalproof.Comment
 import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.NotBlank
 
 @Schema(description = "[Request] 다짐 인증 생성")
 data class GoalProofCreateRequest(
@@ -12,9 +13,11 @@ data class GoalProofCreateRequest(
     val goalId: Long,
 
     @Schema(description = "다짐 인증에 사용한 이미지 url")
+    @field:NotBlank(message = "URL은 공백이어서는 안됩니다.")
     val url: String,
 
     @Schema(description = "다짐 인증에 대한 부연설명")
+    @field:NotBlank(message = "Comment는 공백이어서는 안됩니다.")
     val comment: String
 )
 
@@ -30,9 +33,11 @@ fun GoalProofCreateRequest.toServiceRequest(
 @Schema(description = "[Request] 다짐 인증 수정")
 data class GoalProofUpdateRequest(
     @Schema(description = "다짐 인증에 사용한 이미지 url")
+    @field:NotBlank(message = "URL은 공백이어서는 안됩니다.")
     val url: String? = null,
 
     @Schema(description = "다짐 인증에 대한 부연설명")
+    @field:NotBlank(message = "Comment는 공백이어서는 안됩니다.")
     val comment: String? = null
 )
 
