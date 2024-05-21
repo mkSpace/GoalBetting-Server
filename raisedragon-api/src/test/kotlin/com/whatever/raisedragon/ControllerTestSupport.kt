@@ -3,9 +3,10 @@ package com.whatever.raisedragon
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.whatever.raisedragon.applicationservice.betting.BettingApplicationService
 import com.whatever.raisedragon.applicationservice.goalgifticon.GoalGifticonApplicationService
+import com.whatever.raisedragon.applicationservice.goalproof.GoalProofApplicationService
 import com.whatever.raisedragon.controller.betting.BettingController
 import com.whatever.raisedragon.controller.goalgifticon.GoalGifticonController
-import org.mockito.Mockito.*
+import com.whatever.raisedragon.controller.goalproof.GoalProofController
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -19,6 +20,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
     controllers = [
         BettingController::class,
         GoalGifticonController::class,
+        GoalProofController::class
     ]
 )
 @ActiveProfiles("test")
@@ -35,6 +37,9 @@ abstract class ControllerTestSupport {
 
     @MockBean
     protected lateinit var goalGifticonApplicationService: GoalGifticonApplicationService
+
+    @MockBean
+    protected lateinit var goalProofApplicationService: GoalProofApplicationService
 
     protected fun MockHttpServletRequestBuilder.withCsrf(): MockHttpServletRequestBuilder {
         return with(SecurityMockMvcRequestPostProcessors.csrf())

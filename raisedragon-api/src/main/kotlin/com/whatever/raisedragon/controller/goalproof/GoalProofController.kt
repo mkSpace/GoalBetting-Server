@@ -42,7 +42,7 @@ class GoalProofController(
     }
 
     @Operation(summary = "Retrieving GoalProofs API", description = "모든 다짐 인증을 조회합니다")
-    @GetMapping("goal/{goalId}/goal-proof")
+    @GetMapping("/goal/{goalId}/goal-proof")
     fun retrieveAll(
         @GetAuth userInfo: UserInfo,
         @PathVariable goalId: Long
@@ -51,7 +51,7 @@ class GoalProofController(
     }
 
     @Operation(summary = "Retrieving GoalProofs' result API", description = "해당 다짐이 성공했는지 여부를 알려줍니다")
-    @GetMapping("goal/{goalId}/goal-proof/result")
+    @GetMapping("/goal/{goalId}/goal-proof/result")
     fun isGoalSuccess(
         @GetAuth userInfo: UserInfo,
         @PathVariable goalId: Long
@@ -63,7 +63,7 @@ class GoalProofController(
     @PutMapping("/goal-proof/{goalProofId}")
     fun update(
         @PathVariable goalProofId: Long,
-        @RequestBody request: GoalProofUpdateRequest,
+        @Valid @RequestBody request: GoalProofUpdateRequest,
         @GetAuth userInfo: UserInfo
     ): Response<GoalProofRetrieveResponse> {
         return Response.success(
