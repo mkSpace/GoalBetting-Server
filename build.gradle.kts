@@ -1,11 +1,10 @@
 plugins {
-    id("org.springframework.boot") version "3.2.0"
-    id("io.spring.dependency-management") version "1.1.4"
-    id("application")
     kotlin("jvm") version "1.9.20"
-    kotlin("plugin.spring") version "1.9.20"
-    kotlin("plugin.jpa") version "1.9.20"
     kotlin("kapt") version "1.6.21"
+    kotlin("plugin.spring") version "1.9.20" apply false
+    kotlin("plugin.jpa") version "1.9.20" apply false
+    id("org.springframework.boot") version "3.2.0" apply false
+    id("io.spring.dependency-management") version "1.1.4" apply false
     jacoco
 }
 
@@ -20,24 +19,16 @@ allprojects {
     }
 }
 
-application {
-    mainClass = "com.whatever.raisedragon.RaiseDragonApiApplicationKt"
-}
-
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "kotlin-kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.springframework.boot")
-    apply(plugin = "kotlin")
-    apply(plugin = "java-library")
-    apply(plugin = "kotlin-jpa")
-    apply(plugin = "io.spring.dependency-management")
-    apply(plugin = "kotlin-kapt")
-    apply(plugin = "application")
     apply(plugin = "jacoco")
+    apply(plugin = "io.spring.dependency-management")
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.springframework.boot:spring-boot-starter")
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
         implementation("io.github.microutils:kotlin-logging:2.0.8")
         implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -45,8 +36,6 @@ subprojects {
         // SpringMockk
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("com.ninja-squad:springmockk:3.1.1")
-
-        testRuntimeOnly("com.h2database:h2")
     }
 
     jacoco {
@@ -146,11 +135,11 @@ subprojects {
         }
     }
 
-    tasks.bootJar {
+    tasks.getByName("bootJar") {
         enabled = false
     }
 
-    tasks.jar {
+    tasks.getByName("jar") {
         enabled = true
     }
 }

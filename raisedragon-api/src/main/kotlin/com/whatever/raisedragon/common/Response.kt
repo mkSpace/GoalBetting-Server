@@ -24,7 +24,7 @@ data class Response<T>(
             return Response(
                 isSuccess = false,
                 errorResponse = ErrorResponse(
-                    code = exceptionCode.code,
+                    code = exceptionCode.errorCode,
                     detailMessage = detailMessage ?: exceptionCode.message
                 )
             )
@@ -34,7 +34,7 @@ data class Response<T>(
             return Response(
                 isSuccess = false,
                 errorResponse = ErrorResponse(
-                    code = exception.exceptionCode.code,
+                    code = exception.exceptionCode.errorCode,
                     detailMessage = exception.message
                 )
             )

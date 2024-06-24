@@ -74,7 +74,7 @@ class ApiExceptionHandler {
     @ExceptionHandler(BaseException::class)
     private fun handleBaseException(exception: BaseException): ResponseEntity<Response<Unit>> {
         return ResponseEntity
-            .status(exception.exceptionCode.httpStatus)
+            .status(exception.exceptionCode.httpStatusCode)
             .body(Response.fail(exception))
     }
 

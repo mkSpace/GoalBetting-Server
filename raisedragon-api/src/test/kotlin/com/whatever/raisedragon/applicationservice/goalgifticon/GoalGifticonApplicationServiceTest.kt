@@ -20,12 +20,12 @@ import com.whatever.raisedragon.domain.user.UserEntity
 import com.whatever.raisedragon.domain.user.UserRepository
 import com.whatever.raisedragon.domain.winner.WinnerEntity
 import com.whatever.raisedragon.domain.winner.WinnerRepository
-import jakarta.transaction.Transactional
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Transactional
