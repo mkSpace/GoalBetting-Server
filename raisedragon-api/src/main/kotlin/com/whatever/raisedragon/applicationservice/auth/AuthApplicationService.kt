@@ -5,11 +5,11 @@ import com.whatever.raisedragon.applicationservice.auth.dto.LoginServiceRequest
 import com.whatever.raisedragon.applicationservice.auth.dto.TokenRefreshResponse
 import com.whatever.raisedragon.common.exception.BaseException
 import com.whatever.raisedragon.common.exception.ExceptionCode
-import com.whatever.raisedragon.domain.auth.AuthService
 import com.whatever.raisedragon.domain.refreshtoken.RefreshTokenService
 import com.whatever.raisedragon.domain.user.Nickname
 import com.whatever.raisedragon.domain.user.User
 import com.whatever.raisedragon.domain.user.UserService
+import com.whatever.raisedragon.external.oauth.AuthService
 import com.whatever.raisedragon.security.jwt.JwtAgent
 import com.whatever.raisedragon.security.jwt.JwtToken
 import org.springframework.stereotype.Service

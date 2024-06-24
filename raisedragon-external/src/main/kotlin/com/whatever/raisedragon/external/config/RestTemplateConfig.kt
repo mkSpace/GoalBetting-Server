@@ -1,4 +1,4 @@
-package com.whatever.raisedragon.common.config
+package com.whatever.raisedragon.external.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

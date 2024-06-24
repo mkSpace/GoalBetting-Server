@@ -1,4 +1,4 @@
-package com.whatever.raisedragon.aws
+package com.whatever.raisedragon.external.config
 
 import org.springframework.cloud.aws.autoconfigure.context.ContextCredentialsAutoConfiguration
 import org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
