@@ -1,4 +1,4 @@
-package com.whatever.raisedragon.aws.s3
+package com.whatever.raisedragon.external.config
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider
 import com.amazonaws.auth.BasicAWSCredentials

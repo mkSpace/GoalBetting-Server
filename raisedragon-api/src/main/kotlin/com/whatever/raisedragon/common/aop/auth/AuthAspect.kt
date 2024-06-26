@@ -2,14 +2,12 @@ package com.whatever.raisedragon.common.aop.auth
 
 import com.whatever.raisedragon.common.exception.BaseException
 import com.whatever.raisedragon.common.exception.ExceptionCode
-import com.whatever.raisedragon.domain.user.UserRepository
-import com.whatever.raisedragon.domain.user.toDto
+import com.whatever.raisedragon.domain.user.UserService
 import com.whatever.raisedragon.security.jwt.JwtAgent
 import jakarta.servlet.http.HttpServletRequest
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import org.springframework.util.StringUtils
 
@@ -17,7 +15,7 @@ import org.springframework.util.StringUtils
 @Component
 class AuthAspect(
     private val httpServletRequest: HttpServletRequest,
-    private val userRepository: UserRepository,
+    private val userService: UserService,
     private val jwtAgent: JwtAgent
 ) {
 
@@ -29,11 +27,7 @@ class AuthAspect(
         )
 
         val userId = jwtAgent.extractUserId(token).toString().toLong()
-        val user = userRepository.findByIdOrNull(userId)?.toDto()
-            ?: throw BaseException.of(
-                exceptionCode = ExceptionCode.E404_NOT_FOUND,
-                executionMessage = "존재하지 않는 유저입니다."
-            )
+        val user = userService.findById(userId)
 
         AuthContext.USER_CONTEXT.set(user)
         return pjp.proceed(pjp.args)

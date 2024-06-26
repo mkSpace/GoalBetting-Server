@@ -1,4 +1,4 @@
-package com.whatever.raisedragon.domain.auth
+package com.whatever.raisedragon.external.oauth
 
 interface AuthService {
     /**

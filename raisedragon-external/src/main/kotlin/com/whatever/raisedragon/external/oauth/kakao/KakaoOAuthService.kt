@@ -1,6 +1,6 @@
-package com.whatever.raisedragon.domain.auth.oauth.kakao
+package com.whatever.raisedragon.external.oauth.kakao
 
-import com.whatever.raisedragon.domain.auth.AuthService
+import com.whatever.raisedragon.external.oauth.AuthService
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
